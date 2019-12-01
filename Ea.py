@@ -17,7 +17,8 @@ class EvolutionaryAlgorithm:
 
     def select(self):
         fitness = self.getFitness()
-
+        idx = random.randint()
+        parent = population[idx]
         return parent
 
 
@@ -37,7 +38,8 @@ class EvolutionaryAlgorithm:
                     child.coins[coin] = parent.coins
                 else:
                     child.coins[coin] = population[i_].coins
-        return child
+            return child
+        return parent
 
 
     def mutatePopulation(self):
