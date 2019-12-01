@@ -19,7 +19,7 @@ class EvolutionaryAlgorithm:
 
     def select(self):
         fitness = self.getAllFitness() + 1e-4
-        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=fitness/fitness.sum())
+        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=1-(fitness/fitness.sum()))
         return self.population[idx]
     
 
