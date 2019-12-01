@@ -4,36 +4,30 @@ from collections import defaultdict
 import operator
 import random
 
-CROSS_RATE = 0.4
+CROSS_RATE = 0.2
+MUTATION_RATE = 0.01
 
 class EvolutionaryAlgorithm:
 
-    def __init__(self, currency, crossRate):
+    def __init__(self, currency):
         self.currency = currency
-        self.crossRate = crossRate
+        
 
     def rankRoutes(self, population):
         pass
 
     def select(self):
         fitness = self.getFitness()
-        idx = random.randint()
+        idx = random()
         parent = population[idx]
         return parent
 
-
-    
-    
-    def coinFlip(self):
-        num = random.choice(["Heads", "Tails"])
-        return num
-
     def crossover(self, parent):
-        if random.rand() < self.crossRate:
-            i_ = random.randint(0, len(population))
+        if random.rand() < CROSS_RATE:
+            i_ = random.randint(0, len(population), size=1)
             child = Member(self.currency)
             for coin in currency.coins:
-                num = coinflip()
+                num = random.choice(["Heads", "Tails"])
                 if num == "Heads":
                     child.coins[coin] = parent.coins
                 else:
@@ -43,7 +37,8 @@ class EvolutionaryAlgorithm:
 
 
     def mutatePopulation(self):
-        pass    
+        if random.randint(O, len(population), sieze=1):
+
 
     def getFitness(self, member):
         fitness = 0
