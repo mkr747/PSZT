@@ -19,7 +19,7 @@ class EvolutionaryAlgorithm:
 
     def select(self):
         fitness = self.getAllFitness() + 1e-4
-        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=fitness/fitness.sum())
+        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=1-fitness/fitness.sum())
         return self.population[idx]
     
 
@@ -38,8 +38,8 @@ class EvolutionaryAlgorithm:
 
 
     def mutatePopulation(self):
-        if random.randint(O, len(population), sieze=1):
-
+        if random.randint(0, len(population), size=1):
+            coin = random.choice(self.currency)
 
     def getAllFitness(self):
         fitness = []
