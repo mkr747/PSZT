@@ -1,4 +1,6 @@
 from Fitness import Fitness
+from Member import Member
+import Currency from Currency
 import operator
 import random
 
@@ -27,15 +29,20 @@ class GeneticAlgorithm:
             matingpool.append(population[index])
         return matingpool
     
-    def coinFlip():
+    def coinFlip(self):
         num = random.choice(["Heads", "Tails"])
         return num
 
     def crossover(self, parent1, parent2):
-        num = coinflip()
-        nextGeneration = {}
-        if num == "Heads":
-
+        children = [Member(self.currency), Member(self.curenccy)]
+        for child in children:
+            for coin in currency.coins:
+                num = coinflip()
+                if num == "Heads":
+                    children.coins[coin] = parent1.coins
+                else:
+                    children.coins[coin] = parent2.coins
+        return children
 
 
     def mutatePopulation(self):

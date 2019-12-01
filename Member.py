@@ -5,7 +5,7 @@ class Memeber:
     Change = 0
 
     def __init__(self, currency):
-        Memeber._id = Memeber._id + 1
+        Memeber._id += 1
         self.id = Memeber._id
         self.fitnessValue = -1
         self.change = Member.Change
