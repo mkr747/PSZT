@@ -9,8 +9,7 @@ class Memeber:
         self.id = Memeber._id
         self.fitnessValue = -1
         self.change = Member.Change
-        for coin in currency.coins:
-            self.coins[coin] = 0
+        self.coins = { value: 0 for value in currency.coins }
 
     def setChange(value):
         Memeber.Change = value

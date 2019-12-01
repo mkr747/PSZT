@@ -1,24 +1,19 @@
-from Fitness import Fitness
+from Currency import Currency
+from Member import Member
+from collections import defaultdict
 import operator
 
-class GeneticAlgorithm:
-    def __init__(self, goal_value):
-        self.goal_value = goal_value
+class EvolutionaryAlgorithm:
+
+    def __init__(self, currency):
+        self.currency = currency
 
     def rankRoutes(self, population):
-        fitnessResults = {}
+        pass
 
-        for i in range(0, len(population)):
-            fitness = Fitness(population[i], self.goal_value)
-            fitnessResults[i] = fitness.countFitness()
-        
-        return sorted(fitnessResults.items(), key = operator.itemgetter(1), reverse = True)
-
-    @staticmethod
     def selection(popRanked, eliteSize):
         pass
 
-    @staticmethod
     def matingPool(population, selectionResults):
         matingpool = []
         for i in range(0, len(selectionResults)):
@@ -31,3 +26,23 @@ class GeneticAlgorithm:
 
     def mutatePopulation(self):
         pass
+    
+    def getFitness(self, member):
+        fitness = 0
+        for coin in self.currency.coins:
+            fitness += (self.minimal[coin] - member.coins[coin]) * coin
+
+        return fitness
+
+    #Run after init
+    def countMinimalCoins(self):
+        change = Member.Change
+        dictionary = { value: 0 for value in self.currency.coins }
+        for coin in self.currency.coins:
+            remainder = change % coin
+            dictionary[coin] = (change - remainder) / coin
+            change = remainder
+
+        self.minimal = dictionary
+        
+                
