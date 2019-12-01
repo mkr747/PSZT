@@ -3,16 +3,24 @@ from Member import Member
 from collections import defaultdict
 import operator
 import random
+import numpy as np
 
 CROSS_RATE = 0.2
 MUTATION_RATE = 0.01
+POP_SIZE = 200
 
 class EvolutionaryAlgorithm:
 
-    def __init__(self, currency, population):
+    def __init__(self, currency, pop_size):
         self.currency = currency
+        self.crossRate = crossRate
         self.population = population
 
+        for i in range(pop_size):
+            member = Member(currency)
+            for coin in coins:
+                member.coins[coin] = np.randint(Member.Change)
+            self.population.append(member)
     def getFitness(self, member):
         fitness = 0
         for coin in self.currency.coins:
@@ -21,7 +29,7 @@ class EvolutionaryAlgorithm:
 
     def select(self):
         fitness = self.getAllFitness() + 1e-4
-        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=1-fitness/fitness.sum())
+        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=1-(fitness/fitness.sum())))
         return self.population[idx]
 
     def crossover(self, parent, population):
