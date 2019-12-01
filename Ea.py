@@ -18,7 +18,7 @@ class EvolutionaryAlgorithm:
 
     def select(self):
         fitness = self.getAllFitness() + 1e-4
-        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=1-(fitness/fitness.sum()))
+        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=1-(fitness/fitness.sum())))
         return self.population[idx]
     
     def coinFlip(self):
@@ -40,11 +40,12 @@ class EvolutionaryAlgorithm:
 
 
     def mutatePopulation(self):
-        pass    
+        pass
 
     def getAllFitness(self):
         fitness = []
         for member in self.population:
+            #member.fitnessValue = getFitness(member)
             fitness.append(getFitness(member))
         
         return fitness
