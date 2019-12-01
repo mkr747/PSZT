@@ -21,6 +21,7 @@ class EvolutionaryAlgorithm:
             for coin in coins:
                 member.coins[coin] = np.randint(Member.Change)
             self.population.append(member)
+
     def getFitness(self, member):
         fitness = 0
         for coin in self.currency.coins:
@@ -33,34 +34,32 @@ class EvolutionaryAlgorithm:
         return self.population[idx]
 
     def crossover(self, parent, population):
-        if random.rand() < CROSS_RATE:
-            i_ = random.randint(0, len(population))
+        if np.random.rand() < CROSS_RATE:
+            i_ = np.random.randint(0, len(population), size=1)
             child = Member(self.currency)
             for coin in currency.coins:
                 num = random.choice(["Heads", "Tails"])
                 if num == "Heads":
                     child.coins[coin] = parent.coins
                 else:
-                    child.coins[coin] = population[i_].coins
+                    child.coins[coin] = population[i_].coins[coin]
             return child
         return parent
 
     def mutate(self, child):
-        if random.randint(0, len(self.population)):
+        if np.random.randint(0, len(self.population), size=1):
             coin = random.choice(self.currency)
-            child.coins[coin] = random.randint(0, Member.change)
+            child.coins[coin] = np.random.randint(0, Member.change, size=1)
         return child
 
     def evolve(self):
         population = self.select()
         population_copy = population.copy()
         for parent in population:
-            child = self.crossover(parent)
+            child = self.crossover(parent, population_copy)
             child = self.mutate(child)
             parent[:] = child
         self.population = population
-
-
 
     def getAllFitness(self):
         fitness = []
