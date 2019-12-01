@@ -5,15 +5,12 @@ import operator
 import random
 import numpy as np
 
-CROSS_RATE = 0.2
-MUTATION_RATE = 0.01
-POP_SIZE = 200
-
 class EvolutionaryAlgorithm:
 
-    def __init__(self, currency, pop_size):
+    def __init__(self, currency, pop_size, crossRate, mutationRate):
         self.currency = currency
         self.crossRate = crossRate
+        self.mutationRate = mutationRate
         self.population = population
 
         for i in range(pop_size):
@@ -21,6 +18,7 @@ class EvolutionaryAlgorithm:
             for coin in coins:
                 member.coins[coin] = np.randint(Member.Change)
             self.population.append(member)
+
     def getFitness(self, member):
         fitness = 0
         for coin in self.currency.coins:
@@ -29,11 +27,12 @@ class EvolutionaryAlgorithm:
 
     def select(self):
         fitness = self.getAllFitness() + 1e-4
+        print(f"{self.population[fitness.index(min(fitness))]} with fitness : {min(fitness)}")
         idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=1-(fitness/fitness.sum())))
         return self.population[idx]
 
     def crossover(self, parent, population):
-        if random.rand() < CROSS_RATE:
+        if random.rand() < self.crossRate:
             i_ = random.randint(0, len(population))
             child = Member(self.currency)
             for coin in currency.coins:
@@ -46,7 +45,7 @@ class EvolutionaryAlgorithm:
         return parent
 
     def mutate(self, child):
-        if random.randint(0, len(self.population)):
+        if random.randint(0, len(self.population)) < self.mutationRate:
             coin = random.choice(self.currency)
             child.coins[coin] = random.randint(0, Member.change)
         return child
@@ -60,16 +59,12 @@ class EvolutionaryAlgorithm:
             parent[:] = child
         self.population = population
 
-
-
     def getAllFitness(self):
         fitness = []
         for member in self.population:
-            fitness.append(getFitness(member))
+            fitness.append(self.getFitness(member))
         
         return fitness
-
-   
 
     #Run after init
     def countMinimalCoins(self):

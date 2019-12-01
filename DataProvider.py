@@ -8,8 +8,8 @@ class DataProvider:
     def setUpCurrency():
         if not DataProvider.ChosenCurrency:
             pln = Currency("PLN", [1, 2, 5])
-            ChosenCurrency = pln
-        return ChosenCurrency
+        
+        return pln
 
     @staticmethod
     def initialPopulation(popSize, changeValue):
