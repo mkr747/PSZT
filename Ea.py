@@ -9,23 +9,24 @@ MUTATION_RATE = 0.01
 
 class EvolutionaryAlgorithm:
 
-    def __init__(self, currency, crossRate, population):
+    def __init__(self, currency, population):
         self.currency = currency
-        self.crossRate = crossRate
         self.population = population
 
-    def rankRoutes(self, population):
-        pass
+    def getFitness(self, member):
+        fitness = 0
+        for coin in self.currency.coins:
+            fitness += (self.minimal[coin] - member.coins[coin]) * coin
+        return fitness
 
     def select(self):
         fitness = self.getAllFitness() + 1e-4
-        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=1-(fitness/fitness.sum())))
+        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=1-fitness/fitness.sum())
         return self.population[idx]
-    
 
-    def crossover(self, parent):
+    def crossover(self, parent, population):
         if random.rand() < CROSS_RATE:
-            i_ = random.randint(0, len(population), size=1)
+            i_ = random.randint(0, len(population))
             child = Member(self.currency)
             for coin in currency.coins:
                 num = random.choice(["Heads", "Tails"])
@@ -36,25 +37,31 @@ class EvolutionaryAlgorithm:
             return child
         return parent
 
-
-    def mutatePopulation(self):
-        if random.randint(0, len(population), size=1):
+    def mutate(self, child):
+        if random.randint(0, len(self.population)):
             coin = random.choice(self.currency)
+            child.coins[coin] = random.randint(0, Member.change)
+        return child
+
+    def evolve(self):
+        population = self.select()
+        population_copy = population.copy()
+        for parent in population:
+            child = self.crossover(parent)
+            child = self.mutate(child)
+            parent[:] = child
+        self.population = population
+
+
 
     def getAllFitness(self):
         fitness = []
         for member in self.population:
-            #member.fitnessValue = getFitness(member)
             fitness.append(getFitness(member))
         
         return fitness
 
-    def getFitness(self, member):
-        fitness = 0
-        for coin in self.currency.coins:
-            fitness += (self.minimal[coin] - member.coins[coin]) * coin
-
-        return fitness
+   
 
     #Run after init
     def countMinimalCoins(self):
