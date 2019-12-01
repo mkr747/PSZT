@@ -3,19 +3,22 @@ from Member import Member
 from collections import defaultdict
 import operator
 import random
+import numpy as np
 
 CROSS_RATE = 0.2
 MUTATION_RATE = 0.01
+POP_SIZE = 200
 
 class EvolutionaryAlgorithm:
 
-    def __init__(self, currency, crossRate, population):
+    def __init__(self, currency, pop_size):
         self.currency = currency
-        self.crossRate = crossRate
-        self.population = population
 
-    def rankRoutes(self, population):
-        pass
+        for i in range(pop_size):
+            member = Member(currency)
+            for coin in coins:
+                member.coins[coin] = np.randint(Member.Change)
+            self.population.append(member)
 
     def select(self):
         fitness = self.getAllFitness() + 1e-4
