@@ -9,18 +9,19 @@ MUTATION_RATE = 0.01
 
 class EvolutionaryAlgorithm:
 
-    def __init__(self, currency):
+    def __init__(self, currency, crossRate, population):
         self.currency = currency
-        
+        self.crossRate = crossRate
+        self.population = population
 
     def rankRoutes(self, population):
         pass
 
     def select(self):
-        fitness = self.getFitness()
-        idx = random()
-        parent = population[idx]
-        return parent
+        fitness = self.getAllFitness() + 1e-4
+        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=fitness/fitness.sum())
+        return self.population[idx]
+    
 
     def crossover(self, parent):
         if random.rand() < CROSS_RATE:
@@ -39,6 +40,13 @@ class EvolutionaryAlgorithm:
     def mutatePopulation(self):
         if random.randint(O, len(population), sieze=1):
 
+
+    def getAllFitness(self):
+        fitness = []
+        for member in self.population:
+            fitness.append(getFitness(member))
+        
+        return fitness
 
     def getFitness(self, member):
         fitness = 0
