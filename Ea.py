@@ -1,5 +1,6 @@
 from Fitness import Fitness
 import operator
+import random
 
 class GeneticAlgorithm:
     def __init__(self, goal_value):
@@ -25,9 +26,17 @@ class GeneticAlgorithm:
             index = selectionResults[i]
             matingpool.append(population[index])
         return matingpool
+    
+    def coinFlip():
+        num = random.choice(["Heads", "Tails"])
+        return num
 
-    def corssover(self):
-        pass
+    def crossover(self, parent1, parent2):
+        num = coinflip()
+        nextGeneration = {}
+        if num == "Heads":
+
+
 
     def mutatePopulation(self):
         pass
