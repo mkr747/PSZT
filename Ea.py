@@ -8,21 +8,18 @@ CROSS_RATE = 0.4
 
 class EvolutionaryAlgorithm:
 
-    def __init__(self, currency, crossRate):
+    def __init__(self, currency, crossRate, population):
         self.currency = currency
         self.crossRate = crossRate
+        self.population = population
 
     def rankRoutes(self, population):
         pass
 
     def select(self):
-        fitness = self.getFitness()
-        idx = random.randint()
-        parent = population[idx]
-        return parent
-
-
-    
+        fitness = self.getAllFitness() + 1e-4
+        idx = np.random.choice(np.arange(len(self.population), size=len(self.population), replace=True, p=fitness/fitness.sum())
+        return self.population[idx]
     
     def coinFlip(self):
         num = random.choice(["Heads", "Tails"])
@@ -30,7 +27,7 @@ class EvolutionaryAlgorithm:
 
     def crossover(self, parent):
         if random.rand() < self.crossRate:
-            i_ = random.randint(0, len(population))
+            i_ = random.randint(0, len(self.population - 1))
             child = Member(self.currency)
             for coin in currency.coins:
                 num = coinflip()
@@ -44,6 +41,13 @@ class EvolutionaryAlgorithm:
 
     def mutatePopulation(self):
         pass    
+
+    def getAllFitness(self):
+        fitness = []
+        for member in self.population:
+            fitness.append(getFitness(member))
+        
+        return fitness
 
     def getFitness(self, member):
         fitness = 0
