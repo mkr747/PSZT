@@ -7,8 +7,7 @@ class DataProvider:
     @staticmethod
     def setUpCurrency():
         if not DataProvider.ChosenCurrency:
-            pln = Currency("PLN")
-            pln.addCoins([1, 2, 5])
+            pln = Currency("PLN", [1, 2, 5])
             ChosenCurrency = pln
         return ChosenCurrency
 
