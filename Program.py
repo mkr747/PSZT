@@ -6,7 +6,7 @@ from Member import Member
 CROSS_RATE = 0.2
 MUTATION_RATE = 0.05
 POP_SIZE = 200
-CHANGE = 99
+CHANGE = 57
 NON_ZERO_FITNESS = 1e-4
 
 def main():
