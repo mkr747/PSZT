@@ -1,6 +1,6 @@
-import Currency from Currency
+from Currency import Currency
 
-class Memeber:
+class Member:
     Change = 0
 
     def __init__(self, currency):
@@ -8,5 +8,6 @@ class Memeber:
         self.change = Member.Change
         self.coins = { value: 0 for value in currency.coins }
 
+    @staticmethod
     def setChange(value):
-        Memeber.Change = value
+        Member.Change = value
