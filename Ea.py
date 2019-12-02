@@ -37,7 +37,7 @@ class EvolutionaryAlgorithm:
     def select(self):
         fitness = self.getAllFitness()
         self.best_value = max(fitness)
-        print(f"{self.population[fitness.index(max(fitness))].coins} with the best fitness : {self.best_value}")
+        print(f"The best solution : {self.population[fitness.index(max(fitness))].coins} with fitness : {self.best_value}")
         idx = np.random.choice(np.arange(self.pop_size), size=self.pop_size, replace=True, p=self.probability(fitness))
         newGeneration = []
         for index in idx:
